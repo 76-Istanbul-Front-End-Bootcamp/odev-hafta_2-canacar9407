@@ -10,7 +10,7 @@ var person = {
   }
 }
 
-var messageFunc = person.message
+var messageFunc = person.message.bind(person)
 messageFunc();
 
 
@@ -27,8 +27,8 @@ var numbers = {
   multiply: function(){
     this.numbers[0].map(function(number, numberIndex){
         const result = number * this.numbers[1];
-        console.log(result)
-    })
+        console.log(result)   
+    }.bind(this))
   }
 };
 
@@ -43,8 +43,23 @@ numbers.multiply();
   Ornek : isValidName(" J ohn") false donmeli
 */
 function isValidName(name){
+   if (typeof name === 'string' && name.length>1){
+     //console.log("True");
+     var trimmedName = name.trim();
+     var divideBySpaces = trimmedName.split(" ");
+     if(divideBySpaces.length>1 || divideBySpaces[0] == ("")){
+       console.log("False")
+     }else{
+       console.log("True")
+     }
+    
+     
+   }else{
+     console.log("False");
+   }
 
 }
+isValidName("john")
 
 /*
   Odev 4:
@@ -59,7 +74,23 @@ function isValidName(name){
   Ornek: katilimSaati("5", "30") 150 sonucunu vermelidir.
 */
 function katilimSaati(dersSayisi, dersSuresi){
+  if (typeof dersSayisi === "boolean" ||typeof dersSuresi === "boolean" ){
+    return console.log("False")
+  }
+
+  
+  var dersSay = Number(dersSayisi );
+  var dersSur = Number(dersSuresi );
+ 
+  var sonuc = (dersSay * dersSur);
+
+  if (isNaN(sonuc) ||Number(sonuc) === sonuc && sonuc % 1 !== 0 ||Number(dersSay) === dersSay && dersSay % 1 !== 0 ||Number(dersSur) === dersSur && dersSur % 1 !== 0){
+  console.log("False")
+  }else{
+    console.log(sonuc)
+    }
+  
 
 }
-
+katilimSaati(1 ,2)
 
